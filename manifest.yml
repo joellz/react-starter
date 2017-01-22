@@ -1,0 +1,7 @@
+applications:
+-   name: changeme
+    memory: 256M
+    instances: 1
+    host: changeme
+    domain: mybluemix.net
+    buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git#v1.2.1
