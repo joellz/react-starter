@@ -4,12 +4,15 @@ import { Router, Route, Redirect, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { mainReducer, initialState } from './redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
 import Home from 'home'
 import App from 'app'
 
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore)
-const store = createStoreWithMiddleware(mainReducer)
+const store = createStore(mainReducer, composeWithDevTools(
+	applyMiddleware(thunkMiddleware)
+))
+
 
 render ((
 	<Provider store={store}>
