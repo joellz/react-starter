@@ -1,18 +1,17 @@
-var express = require('express')
-var webpack = require('webpack')
-var webpackMiddleware = require('webpack-dev-middleware')
-var webpackHotMiddleware = require('webpack-hot-middleware')
+import express from 'express'
+import webpack from 'webpack'
+import webpackMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
 
-var config = require('./webpack.debug.config.js')
+const webpackDevConfig = require('./webpack.debug.config')
 
-const host = '0.0.0.0'
-const port = 9090
+const host = process.env.HOST || '0.0.0.0'
+const port = process.env.PORT || 9090
+const app  = express()
 
-const app = express()
-
-const compiler = webpack(config)
+const compiler = webpack(webpackDevConfig)
 const middleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
+    publicPath: webpackDevConfig.output.publicPath,
     contentBase: 'src',
     stats: {
         colors: true,
@@ -27,11 +26,8 @@ const middleware = webpackMiddleware(compiler, {
 app.use(middleware)
 app.use(webpackHotMiddleware(compiler))
 
-app.get('*', (req, res) => res.sendFile(__dirname + '/index.html'))
+app.get('*', (req, res) => res.sendFile(`${__dirname}/index.html`))
 
-app.listen(port, host, (err) => {
-          if(err)
-              console.log(err);
-
-          console.log(`listening on port ${port}`);
-});
+app.listen(port, host, err => {
+  console.log(`listening on port ${port}`)
+})

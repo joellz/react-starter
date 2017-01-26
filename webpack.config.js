@@ -1,58 +1,49 @@
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var nodeEnv    = process.env.NODE_ENV;
-var css  = nodeEnv === 'production' ? 'css' : 'css?sourceMap';
+const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
+const css = (process.env.NODE_ENV === 'production' ? 'css-loader' : 'css-loader?sourceMap')
 
 module.exports = {
     resolve: {
-        modulesDirectories: ["node_modules", "components"],
-        extensions: ['', '.js', '.jsx']
+        modules: ['node_modules', 'components', 'src'],
+        extensions: ['.js', '.jsx']
     },
 
     entry: [
-        './components/routes.jsx'
+        './src/index.jsx'
     ],
 
     output: {
-        path: __dirname + "/build/",
+        path: `${__dirname}/build/`,
         filename: "bundle.js",
         publicPath: "/build/"
     },
 
     plugins: [
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         })
     ],
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js.*$/,
-                loaders: ['babel'],
+                use: ['babel-loader'],
                 exclude: /node_modules/
             },
             {
                 test: /\.css$/,
-                loaders: ['style', 'css', 'postcss']
+                use: ['style-loader', css, 'postcss-loader']
             },
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css', 'postcss', 'sass']
+                use: ['style-loader', css, 'postcss-loader', 'sass-loader']
             },
             {
                 test: /\.(otf|svg|eot|woff|woff2|ttf|jpg|png|gif)$/,
-                loaders: ['url']
-            },
-            {
-                test: /\.json$/,
-                loaders: ['json']
+                use: ['url-loader']
             }
         ]
-    },
-
-    postcss: function() {
-        return [autoprefixer]
     }
-};
+}
