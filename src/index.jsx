@@ -1,13 +1,17 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, Redirect, browserHistory } from 'react-router'
+import { Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import { mainReducer, initialState } from './redux'
+import { mainReducer, initialState } from 'store'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { App } from 'app'
+
 import thunkMiddleware from 'redux-thunk'
+import createHistory from 'history/createBrowserHistory'
 import Home from 'home'
-import App from 'app'
+
+const history = createHistory()
 
 const store = createStore(mainReducer, composeWithDevTools(
 	applyMiddleware(thunkMiddleware)
@@ -16,10 +20,8 @@ const store = createStore(mainReducer, composeWithDevTools(
 
 render ((
 	<Provider store={store}>
-		<Router history={browserHistory}>
-			<Route component={App}>
-					<Route path='/' component={Home} />
-			</Route>
+		<Router history={history}>
+			<Route component={App} />
 		</Router>
 	</Provider>
 ),document.querySelector('.view'))

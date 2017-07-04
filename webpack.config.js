@@ -33,12 +33,18 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', css, 'postcss-loader']
-            },
-            {
                 test: /\.scss$/,
-                use: ['style-loader', css, 'postcss-loader', 'sass-loader']
+                use: [
+                    'style-loader', css,
+                    { loader: 'postcss-loader', options: { plugins: () => [ require('autoprefixer')() ] } },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            data: "@import '~sass/global';",
+                            includePaths: [ '/src/sass/_global.scss' ]
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(otf|svg|eot|woff|woff2|ttf|jpg|png|gif)$/,

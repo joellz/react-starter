@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../../redux/actions'
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom'
+import * as actions from 'store/actions'
+import './styles.scss'
 
-class App extends Component {
+const hello = () => {
+  return (
+    <p>Hello, world.</p>
+  )
+}
+
+class app extends Component {
   constructor(props){
     super(props)
   }
+
+  
   render(){
-    const children = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, {...this.props.appState})
-    })
+
     return (
       <div className='app'>
-        {children}
+        <Switch>
+          <Route exact path='/' component={hello} />
+        </Switch>
       </div>
     )
   }
 }
-export default connect(state => state)(App)
+
+export const App = withRouter (
+  connect(state => state)(app)
+)
