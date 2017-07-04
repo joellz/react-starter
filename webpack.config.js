@@ -5,11 +5,11 @@ const css = (process.env.NODE_ENV === 'production' ? 'css-loader' : 'css-loader?
 module.exports = {
     resolve: {
         modules: ['node_modules', 'components', 'src'],
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
 
     entry: [
-        './src/index.jsx'
+        './src/index.tsx'
     ],
 
     output: {
@@ -28,9 +28,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js.*$/,
-                use: ['babel-loader'],
-                exclude: /node_modules/
+                test: /\.(t|j)sx?$/,
+                use: { loader: 'awesome-typescript-loader', options: { useCache: true } }
             },
             {
                 test: /\.scss$/,

@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+      "baseUrl": "src",
+      "paths": {
+          "*": [
+              "*",
+              "lib/*",
+              "classes/*",
+              "types/*",
+              "components/*"
+          ]
+      },
+      "allowSyntheticDefaultImports": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "noImplicitAny": false,
+      "lib": ["dom", "es2016"],
+      "skipLibCheck": true,
+      "moduleResolution": "node",
+      "outDir": "./build/",       // path to output directory
+      "sourceMap": true,          // allow sourcemap support
+      "strictNullChecks": false,   // enable strict null checks as a best practice
+      "module": "es6",            // specifiy module code generation
+      "jsx": "react",             // use typescript to transpile jsx to js
+      "target": "es5",            // specify ECMAScript target version
+      "allowJs": true             // allow a partial TypeScript and JavaScript codebase
+  },
+  "include": [ "./src/", "index.d.ts", "./src/types", "./postcss.config.ts" ]
+}

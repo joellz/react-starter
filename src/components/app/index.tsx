@@ -1,16 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, SFC } from 'react'
 import { connect } from 'react-redux'
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom'
-import * as actions from 'store/actions'
+import { HelloWorld } from 'app/hello'
+
 import './styles.scss'
 
-const hello = () => {
-  return (
-    <p>Hello, world.</p>
-  )
-}
-
-class app extends Component {
+class app extends Component <any, any> {
   constructor(props){
     super(props)
   }
@@ -21,7 +16,7 @@ class app extends Component {
     return (
       <div className='app'>
         <Switch>
-          <Route exact path='/' component={hello} />
+          <Route exact path='/' component={HelloWorld} />
         </Switch>
       </div>
     )
