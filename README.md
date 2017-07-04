@@ -1,12 +1,12 @@
 # React Starter
 React Starter is a minimal ecosystem starter kit for building react apps.
 
+- TypeScript
 - React
 - Redux
 - React Router
 - Webpack
 - Babel
-- ES6
 - Nginx
 - Hot Reloading
 
