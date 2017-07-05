@@ -26,7 +26,7 @@ const middleware = webpackMiddleware(compiler, {
 app.use(middleware)
 app.use(webpackHotMiddleware(compiler))
 
-app.get('*', (req, res) => res.sendFile(`${__dirname}/index.html`))
+app.get('*', (req, res) => res.sendFile(`${__dirname}/build/index.html`))
 
 app.listen(port, host, err => {
   console.log(`listening on port ${port}`)
