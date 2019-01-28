@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"node ./server/server.js\" \"webpack --mode development\" \"NODE_ENV='development' webpack-dev-server\"",
+    "dev": "concurrently \"webpack --mode development\" \"NODE_ENV='development' webpack-dev-server\"",
     "prod": "webpack --mode production",
     "test": "jest"
   },
