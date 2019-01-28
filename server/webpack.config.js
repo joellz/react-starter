@@ -11,7 +11,6 @@ module.exports = {
   externals: nodeModules,
   name: 'server',
   target: 'node',
-  mode: 'development',
   
   resolve: {
     modules: [ 'api', 'config', 'controllers' ],
