@@ -1,14 +1,9 @@
-import { Request, Response, Router } from 'express'
+import { Router } from 'express'
+import { onPostMessage } from '../controllers'
 
-export const ApiRouter = () => {
+export const ApiRouter = (): Router => {
   const router = Router()
   
-  router.post('/message', (req: Request, res: Response): void => {
-
-    res.send({ 
-      status: 'success', 
-      message: 'ok' 
-    })
-  })
+  router.post('/message', onPostMessage)
   return router
 }
