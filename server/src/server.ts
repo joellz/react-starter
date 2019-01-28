@@ -1,9 +1,10 @@
-const express = require('express')
-const compression = require('compression')
-const parser = require('body-parser')
+import express from 'express'
+import compression from 'compression'
+import parser from 'body-parser'
 
-const ApiRouter = require('./api')
-const Config = require ('./config')
+import { ApiRouter } from './api'
+import { Config } from './config'
+
 const { port } = Config
 
 const app = express()
@@ -12,7 +13,7 @@ const app = express()
 app.use(compression({ level: 9 }))
 app.use(parser.json())
 app.use(parser.urlencoded({ extended: true }))
-app.use('/api', ApiRouter(express))
+app.use('/api', ApiRouter())
 
 app.listen(port, () => {
   console.log(`front-end server listening on port:${port}`)

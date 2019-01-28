@@ -17,7 +17,7 @@
       "lib": ["dom", "es2016"],
       "skipLibCheck": true,
       "moduleResolution": "node",
-      "outDir": "./build/",       // path to output directory
+      "outDir": "dist/",       // path to output directory
       "sourceMap": true,          // allow sourcemap support
       "strictNullChecks": false,   // enable strict null checks as a best practice
       "module": "es6",            // specifiy module code generation
@@ -25,6 +25,6 @@
       "target": "es5",            // specify ECMAScript target version
       "allowJs": true             // allow a partial TypeScript and JavaScript codebase
   },
-  "include": [ "./src/", "index.d.ts", "./src/types", "./postcss.config.ts" ],
-  "types": ["@types/node"]
+  "include": [ "src/", "./postcss.config.ts" ],
+  "types": ["@types/node", "src/types", "index.d.ts" ]
 }
