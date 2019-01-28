@@ -4,12 +4,17 @@ import { Route, withRouter, Switch } from 'react-router-dom'
 import { HelloWorld } from 'app/hello'
 import { hot } from 'react-hot-loader'
 
+import axios from 'axios'
 import './styles.scss'
 
 class app extends Component {
 
   constructor(props){
     super(props)
+  }
+
+  componentDidMount(){
+    axios.post('api/message', { message: 'api works!' })
   }
 
   render(){
