@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"webpack --mode development\" \"NODE_ENV='development' webpack-dev-server\"",
-    "prod": "webpack --mode production",
-    "test": "jest",
-    "build:server": "webpack --config ./server/webpack.config.js"
+    "dev:ui": "concurrently \"webpack --mode development\" \"NODE_ENV='development' webpack-dev-server\"",
+    "dev:server": "concurrently \"webpack --config ./server/webpack.config.js --watch\" \"nodemon server/build/server.bundle.js\"",
+    "build:ui": "NODE_ENV=production webpack -p --mode production --colors --progress",
+    "build:server": "webpack --config ./server/webpack.config.js -p --colors --progress --mode production",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.10.0",
+    "nodemon": "^1.18.9",
     "postcss-loader": "^3.0.0",
     "react-hot-loader": "^4.3.12",
     "sass-loader": "^7.1.0",
