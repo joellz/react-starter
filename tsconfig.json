@@ -25,5 +25,6 @@
       "target": "es5",            // specify ECMAScript target version
       "allowJs": true             // allow a partial TypeScript and JavaScript codebase
   },
-  "include": [ "./src/", "index.d.ts", "./src/types", "./postcss.config.ts" ]
+  "include": [ "./src/", "index.d.ts", "./src/types", "./postcss.config.ts" ],
+  "types": ["@types/node"]
 }

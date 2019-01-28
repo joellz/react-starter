@@ -1,4 +1,5 @@
 node_modules
-.DS_Store
-.awcache
-build
+*.DS_Store
+*.awcache
+dist
+.env

@@ -9,7 +9,6 @@ import { App } from 'app'
 
 import thunkMiddleware from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
-import Home from 'home'
 
 const history = createHistory()
 

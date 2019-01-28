@@ -1,9 +1,14 @@
 import React, { ReactElement, StatelessComponent } from 'react'
+import './styles.scss'
 
-export const HelloWorld: StatelessComponent<any> = (): ReactElement<StatelessComponent<any>> => {
+interface IProps {
+  name: string
+}
+
+export const HelloWorld: StatelessComponent<IProps> = ({ name }): ReactElement<StatelessComponent> => {
   return (
     <div className='hello-world'>
-      <p>Hello, world!</p>
+      <p>Hello, {name}!</p>
     </div>
   )
 }

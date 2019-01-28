@@ -1,65 +1,87 @@
+const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const css = (process.env.NODE_ENV === 'production' ? 'css-loader' : 'css-loader?sourceMap')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-    resolve: {
-        modules: ['node_modules', 'components', 'src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
-    },
+  resolve: {
+    modules: [ 'node_modules', 'components', 'src', 'styles', 'config', 'assets' ],
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  },
 
-    entry: [
-        './src/index.tsx'
-    ],
+  mode: process.env.NODE_ENV,
 
-    output: {
-        path: `${__dirname}/build/`,
-        filename: "bundle.js",
-        publicPath: "/"
-    },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    hot: true,
+    hotOnly: true,
+    open: true,
+    historyApiFallback: true,
+    port: 7000,
 
-    plugins: [
-        new webpack.NoEmitOnErrorsPlugin(),
-        new ExtractTextPlugin({
-    		filename: 'styles.min.css',
-    		allChunks: true
-    	}),
-        new HtmlWebpackPlugin({
-            template: './index.template.html',
-            inject: 'body',
-            filename: 'index.html'
-        }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        })
-    ],
+    proxy: { '/api': 'http://localhost:3000' },
 
-    module: {
-        rules: [
-            {
-                test: /\.(t|j)sx?$/,
-                use: { loader: 'awesome-typescript-loader', options: { useCache: true } }
-            },
-            {
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        css, 'postcss-loader', {
-                            loader: 'sass-loader',
-                            options: {
-                                data: "@import '~sass/global';",
-                                includePaths: ['/src/sass/_global.scss']
-                            }
-                        }
-                    ]
-                })
-            },
-            {
-                test: /\.(otf|svg|eot|woff|woff2|ttf|jpg|png|gif)$/,
-                use: ['url-loader']
-            }
-        ]
+    overlay: {
+      warnings: true,
+      errors: true
     }
+  },
+
+  entry: { main: './src/index.tsx' },
+  devtool: 'source-map',
+
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
+  },
+
+  module: {
+    rules: [
+      { 
+        test: /\.(t|j)sx?$/, 
+        exclude: /node_modules/, 
+        use: { loader: 'awesome-typescript-loader' } 
+      },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      {
+        test: /\.scss$/,
+        use: [ 
+        'style-loader',
+        'postcss-loader',
+        
+        {
+          loader: 'sass-loader',
+
+          options: {
+            data: "@import '~sass/global';",
+            includePaths: [ '/src/sass/_global.scss' ],
+            sourceMap: true,
+            sourceMapContents: false
+          }
+        }]
+      },
+      {
+        test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [ 'url-loader?limit=100000' ]
+      }, 
+      {
+        test: /\.svg|jpg|jpeg|png|gif?$/,
+        use: [ 'file-loader' ]
+      }
+    ]
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'React Starter',
+      filename: 'index.html',
+      template: './index.template.html'
+    }),
+    new CopyWebpackPlugin([
+      { from: 'src/assets', to: 'assets' }
+    ]),
+    new webpack.HotModuleReplacementPlugin()
+  ]
 }
