@@ -2,7 +2,7 @@
 React Starter is a minimal ecosystem starter kit for building react apps.
 
 - TypeScript (v3.2.4)
-- Express (with TypeScript)
+- Express (v4.16.4) (with TypeScript)
 - React (v16.7.0)
 - React-Redux (v6.0.0)
 - React Router (v4.3.1)
