@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev:ui": "concurrently \"webpack --mode development\" \"NODE_ENV='development' webpack-dev-server\"",
-    "dev:server": "concurrently \"webpack --mode development --config ./server/webpack.config.js --watch\" \"nodemon server/build/server.bundle.js\"",
+    "dev:server": "concurrently \"webpack --mode development --config ./server/webpack.config.js --watch\" \"sleep 7 && nodemon server/build/server.bundle.js\"",
     "build:ui": "NODE_ENV=production webpack -p --mode production --colors --progress",
     "build:server": "webpack --config ./server/webpack.config.js -p --colors --progress --mode production",
     "test": "jest"
