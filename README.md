@@ -1,22 +1,25 @@
 # React Starter
 React Starter is a minimal ecosystem starter kit for building react apps.
 
-- TypeScript
-- React
-- Redux
-- React Router
-- Webpack
-- Babel
+- TypeScript (v3.2.4)
+- Express (with TypeScript)
+- React (v16.7.0)
+- React-Redux (v6.0.0)
+- React Router (v4.3.1)
+- Webpack (v4.27.1)
+- Babel (v7.2.0)
 - Nginx
-- Hot Reloading
+- Hot Reloading (v4.27.1)
 
 ## Getting started
 1. run `npm install`
 
 ## Development Server
-Run `npm run dev` to start the local dev server with hot-reloading built in.
+2. 
+Run `npm run dev:server` to start the local dev server.
+Run `npm run dev:ui` to start the front-end webpack dev server with hot reloading
 
 ## Deploying to Production
-This starter kit is designed to easily integrate with IBM Bluemix and Cloud Foundry deploys.
-Assuming you already have a bluemix account, all you have to do is update the name and host properties in the `manifest.yml` file.
-When you're ready to deploy, run `npm run build` to deploy your app to bluemix.
+3. 
+This starter kit is designed to easily integrate with IBM Cloud deploys.
+Assuming you already have am IBM Cloud account, all you have to do is update the name and host properties in the `manifest.yml` file. When you're ready to deploy, in your terminal, run `sh scripts/deploy.sh` to deploy your app to IBM Cloud.
