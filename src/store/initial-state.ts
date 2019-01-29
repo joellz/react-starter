@@ -1,4 +1,8 @@
 
-export const initialState = {
-  user: 'joel'
+export interface InitialAppState {
+  name: string
+}
+
+export const initialAppState: InitialAppState = {
+  name: 'World'
 }

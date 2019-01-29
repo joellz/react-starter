@@ -1,1 +1,2 @@
-export const INITIAL_ACTION = 'INITIAL_ACTION'
+
+export const UPDATE_USERNAME = 'UPDATE_USERNAME'
